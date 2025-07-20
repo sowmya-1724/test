@@ -1,0 +1,39 @@
+body {
+            background-color: skyblue;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: white;
+        }
+        header img {
+            width: 80px;
+            height: 80px;
+            margin-right: 20px;
+        }
+        .item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;
+            background-color: white;
+        }
+        img.item-img {
+            width: 100px;
+            height: 100px;
+        }
+        .marquee {
+            font-weight: bold;
+            font-size: 20px;
+            margin: 10px 0;
+            animation: scroll 10s linear infinite;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        @keyframes scroll {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
