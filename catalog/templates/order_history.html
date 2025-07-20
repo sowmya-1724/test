@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Your Orders</h2>
+{% for order in orders %}
+    <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;"></div>
+        <h3>Order #{{ order.id }} - {{ order.created_at }}</h3>
+        <ul>
+        {% for product in order.products.all %}
+            <li>{{ product.name }} - Rs {{ product.price }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endfor %}
+<a href="/">Back to products</a>
+{% endblock %}

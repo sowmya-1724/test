@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 align="center">Your Cart</h2>
+ 
+<table border="1" cellspacing="0" cellpadding="10" align="center">
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>Image</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Add/Remove</th>
+            <th>price</th>
+            <th>Amount (Rs)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" width="70">
+            </td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.quantity }}</td>
+            <td>
+                <a href="{% url 'add_to_cart' product.id %}" >+</a>
+                <a href="{% url 'remove_from_cart' product.id %}">-</a>
+            </td>
+            <td>Rs {{ product.price }}</td>
+             <td>Rs {{ product.amount }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tr>
+        <td colspan="6" style="text-align: right;"><strong>Total:</strong></td>
+        <td><strong>Rs {{ total }}</strong></td>
+    </tr>
+</table>
+
+<div style="margin-top: 20px;">
+    <div style="text-align: center; margin: 30px 0;">
+    <p><strong>Scan to Pay:</strong></p>
+    <img src="{% url 'generate_cart_qr' %}" alt="QR Code" width="200" style="display: inline-block;">
+</div>
+
+    <div style="text-align: center; margin-top: 30px;">
+    <a href="{% url 'download_invoice' %}" class="btn btn-secondary" style="margin: 10px;">Download Invoice</a>
+    <a href="{% url 'place_order' %}" class="btn btn-success" style="margin: 10px;">Place Order</a>
+    <a href="{% url 'order_history' %}" class="btn btn-secondary" style="margin: 10px;">order history</a>
+    <a href="/" class="btn btn-primary" style="margin: 10px;">Continue Shopping</a>
+</div>
+
+{% endblock %}

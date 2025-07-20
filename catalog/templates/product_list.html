@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Catalog</title>
+
+        
+    
+</head>
+<body bgcolor="pink">
+    
+    <h1>Canteen Items</h1>
+
+<h3>Chose the  Category:</h3>
+<ul>
+    <li><a href="/">All</a></li>
+    {% for category in categories %}
+        <li><a href="?category={{ category.id }}">{{ category.name }}</a></li>
+    {% endfor %}
+</ul>
+
+{% for product in products %}
+    <div class="product">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" "width=200px height=200px">
+        {% endif %}
+        <h2><a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a></h2>
+        <p>Rs {{ product.price }}</p>
+    </div>
+    
+{% endfor %}
+</body>
+</html>
+
+{% endblock %}

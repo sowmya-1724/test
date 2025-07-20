@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>E-commers site</title>
+    <style>
+        body { font-family: Arial, sans-serif;
+                background-color: rgb(210, 219, 221);
+        }
+
+        img { 
+            max-width: 150px; 
+        }
+        .name{
+            font-size: 20px;
+            font-weight: bold;
+            color: #000;
+            justify-content: right;
+        }
+        .product {
+             border: 1px solid #ccc;
+              padding: 10px;
+               margin: 10px;
+                display: inline-block; }
+
+        .logo{
+            display: flex;
+            flex-direction: row;
+            justify-content: left;
+            gap: 15px;
+            padding: 10px;
+        }
+        .logo img{
+            align-items: flex-start;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+        .Search{
+            display: flex;
+            flex-direction: row;
+            float: right;
+        }
+        .Search input{
+            width: 350px;
+            height: 30px;
+        }
+        .Search button{
+            width: 100px;
+            height: 30px; 
+            padding:10px;
+        }
+        
+        .navbar {
+            background-color:pink;
+            overflow: hidden;
+            padding: 10px;
+        }
+        .navbar a {
+            float: left;
+            color: rgb(0, 0, 0);
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #66c3d7;
+            color: rgb(225, 225, 225);
+        }
+        .content {
+            padding: 20px;
+        }
+        .card {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 10px;
+            width: 250px;
+            margin: 10px;
+        }
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .foot{
+            background-color: #000000;
+            text-align: center;
+        }
+        .foot p{
+            color: #ffffff;
+        }
+        .qr{
+            align-items: center;
+            display: contents;
+        }
+        .a login{
+            float: left;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="{% static 'img/college.jpg' %}" align="left">
+        <h1>Mother Theresa E-commers store</h1>
+    </div>
+    <form method="get" class="name">
+    <div class="navbar">
+        <div class="Search">
+            <input type="text" name="q" placeholder="Search..." value="{{ request.GET.q }}"><br>
+            <button type="submit">Search</button>
+        </div>
+        <a href="{% url 'product_list' %}">Home</a>
+        <a href="{% url 'view_cart' %}">cart</a>
+    </div>
+    </form>
+
+    <!-- 👇 Inserted user auth block -->
+    {% if user.is_authenticated %}
+        <p style="text-align: right; padding-right: 20px;">
+            Welcome, <strong>{{ user.username }}</strong> |
+            <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+        </p>
+    {% else %}
+       
+        
+        <p style="text-align: right; padding-right: 20px;">
+            <a href="{% url 'login' %}">Login</a> | <a href="{% url 'signup' %}">Register</a>
+
+        </p>
+    {% endif %}
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <div class="foot">
+        <footer>
+            <p>Copyright &copy; 2022 Mother Theresa E-commerce store</p>
+            <p>Sowmya</p>
+            <p>Sowmya123@gmail.com</p>
+        </footer>
+    </div>
+</body>
+</html>
